@@ -1,0 +1,92 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using WebParkingInvoice.Models;
+using WebParkingInvoice.Static;
+
+namespace WebParkingInvoice.Services
+{
+    public interface ICustomersService
+    {
+        void DemoInit();
+        List<CustomerModel> GetCustomers();
+        CustomerModel GetCustomer(int id);
+    }
+
+    public class CustomersService : ICustomersService
+    {
+        public void DemoInit()
+        {
+            if (CustomersStorage.Customers == null)
+            {
+                // Init agreements
+                var agrList = new List<CustomerModel>();
+
+                // Init random data
+                var rnd = new Random();
+                var customer1id = rnd.Next(0, int.MaxValue);
+                var customer2id = rnd.Next(0, int.MaxValue);
+                var phone11 = rnd.Next(1, 999);
+                var phone12 = rnd.Next(1, 999);
+                var phone21 = rnd.Next(1, 999);
+                var phone22 = rnd.Next(1, 999);
+
+                var customer1 = new CustomerModel()
+                {
+                    Address = "Majaka 31, 11416 Tallinn",
+                    Email = "Henrik.Jensen@gmail.com",
+                    Name = "Henrik Jensen",
+                    ID = customer1id,
+                    PhoneNumber = String.Format("+372 55 {0} {1}", phone11.ToString("000"), phone12.ToString("000")),
+                    IsPremium = true,
+                    Start = DateTime.Now.AddMonths(-6)
+                };
+
+                var customer2 = new CustomerModel()
+                {
+                    Address = "Lõõtsa 6,11415 Tallinn",
+                    Email = "Anders.Svensson@gmail.com",
+                    Name = "Anders Svensson",
+                    ID = customer2id,
+                    PhoneNumber = String.Format("+372 55 {0} {1}", phone21.ToString("000"), phone22.ToString("000")),
+                    IsPremium = false,
+                    Start = DateTime.Now.AddMonths(-6)
+                };
+
+                var mask = "";
+                for (int i = 0; i < int.MaxValue.ToString().Length; i++)
+                {
+                    mask = mask + "0";
+                }
+
+                agrList.Add(customer1);
+                agrList.Add(customer2);
+
+                CustomersStorage.Customers = agrList;
+            }
+        }
+
+        public List<CustomerModel> GetCustomers()
+        {
+            // Check DB
+            if (CustomersStorage.Customers == null)
+            {
+                DemoInit();
+            }
+
+            return CustomersStorage.Customers;
+        }
+
+        public CustomerModel GetCustomer(int id)
+        {
+            // Check DB
+            if (CustomersStorage.Customers == null)
+            {
+                DemoInit();
+            }
+
+            return CustomersStorage.Customers.FirstOrDefault(w => w.ID == id);
+        }
+    }
+}

@@ -1,0 +1,162 @@
+﻿
+
+<div class="well">
+    <h2> @ViewBag.Title</h2>
+    <hr/>
+    <p class="lead">Personal information</p>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">ID</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.ID</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Group</label>
+            <div class="col-sm-10">
+                @if (ViewBag.Customer.IsPremium)
+                {
+                    <a class="btn btn-success btn-sm disabled">Premium</a>
+                }
+                else
+                {
+                    <a class="btn btn-warning btn-sm disabled">Regular</a>
+                }
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.Name</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">PhoneNumber</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.PhoneNumber</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Address</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.Address</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.Email</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Agrement start</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.Start.ToString("yyyy-MM-dd")</p>
+            </div>
+        </div>
+
+        @*public int ID { get; set; }
+            public string Name { get; set; }
+            public string Email { get; set; }
+            public string PhoneNumber { get; set; }
+            public string Address { get; set; }
+
+            public bool IsPremium { get; set; }
+            public DateTime Start { get; set; }
+            public DateTime? End { get; set; }*@
+    </form>
+    <hr/>
+    <form class="form-horizontal">
+        <a href="~/" class="btn btn-primary btn-sm">Show customers &raquo;</a>
+        <a href="~/Home/Invoices/" class="btn btn-primary btn-sm">See Invoices &raquo;</a>
+    </form>
+    <hr/>
+    <p class="lead">@ViewBag.Message</p>
+    <div ng-controller="InvoiceController">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Rate
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr role="row" ng-repeat="p in Invoice.Items">
+                    <td>
+                        {{ $index + 1}}
+                    </td>
+                    <td>
+                        {{ p.Details }}
+                    </td>
+                    <td>
+                        {{ p.Amount }}
+                    </td>
+                    <td>
+                        {{ p.Rate }}
+                    </td>
+                    <td>
+                        {{ p.PriceStr }}
+                    </td>
+                </tr>
+                <tr role="row">
+                    <td colspan="3"></td>
+                    <td>
+                        Total price
+                    </td>
+                    <td>
+                        {{ Invoice.PriceStr }}
+                    </td>
+                </tr>
+                <tr role="row">
+                    <td colspan="3">
+                        
+                    </td>
+                    <td >
+                        Tax
+                    </td>
+                    <td>
+                        {{ Invoice.TaxStr }}
+                    </td>
+                </tr>
+                <tr role="row">
+                    <td colspan="3"></td>
+                    <td>
+                        Amount of tax
+                    </td>
+                    <td>
+                        {{ Invoice.TaxAmountStr }}
+                    </td>
+                </tr>
+                <tr role="row">
+                    <td colspan="3"></td>
+                    <td>
+                        Balance
+                    </td>
+                    <td>
+                        {{ Invoice.BalanceStr }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <form class="form-horizontal">
+        <a href="~/" class="btn btn-primary btn-sm">Show customers &raquo;</a>
+        <a href="~/Home/Invoices/" class="btn btn-primary btn-sm">See Invoices &raquo;</a>
+    </form>
+    @*<p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+

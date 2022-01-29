@@ -1,0 +1,108 @@
+﻿
+
+<div class="well" ng-controller="InvoicesController" >
+    <div class="modal-backdrop" ng-show="disabled" style="-ms-opacity: 0.5; opacity: 0.5; background: white;">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" viewBox="0 0 320 320" fill="transparent" stroke="#337ab7">
+            <defs>
+                <path id="r1" d="m 154.6 27.2 l 5.4 -3.06 l 5.4 3.06">
+                    <animate id="p1" attributeName="d" values="m160,160l0,0 0,0;m130,110l30,-17 30,17;m130,60l30,-17 30,17;m160,20l0,0 0,0" dur="5s" repeatCount="indefinite" />
+                </path>
+                <path id="r2" d="m 148.3 35.6 l 11.7 -6.63 l 11.7 6.63">
+                    <animate attributeName="d" values="m160,160l0,0 0,0;m130,110l30,-17 30,17;m130,60l30,-17 30,17;m160,20l0,0 0,0" dur="10s" repeatCount="indefinite" begin="p1.begin+1s" />
+                    <animate attributeName="stroke-width" values="0;1;1;1;0" dur="6s" repeatCount="indefinite" begin="p1.begin+1s" />
+                </path>
+            </defs>
+
+            <use xlink:href="#r2" />
+
+            <use xlink:href="#r2" transform="rotate(180 160 160)" />
+
+            <use xlink:href="#r1" transform="rotate(60 160 160)" />
+            <use xlink:href="#r1" transform="rotate(120 160 160)" />
+            <use xlink:href="#r1" transform="rotate(240 160 160)" />
+            <use xlink:href="#r1" transform="rotate(300 160 160)" />
+        </svg>
+    </div>
+    <h2>@ViewBag.Title</h2>
+    <p class="lead">@ViewBag.Message<a class="btn btn-default btn-sm  pull-right" ng-click="RefreshData()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a></p>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Invoice number
+                    </th>
+                    <th>
+                        Customer
+                    </th>
+                    <th>
+                        Details
+                    </th>
+                    <th>
+                        Invoice Date
+                    </th>
+                    <th>
+                        Due Date
+                    </th>
+                    <th>
+                        Balance
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+                    @*<th>
+                            Actions
+                        </th>*@
+                </tr>
+            </thead>
+            <tbody>
+                <tr role="row" ng-repeat="i in Invoices">
+                    <td>
+                        {{ $index + 1}}
+                    </td>
+                    <td>
+                        <a href="~/Home/Invoice/{{i.Number}}"> {{ i.Number }}</a>
+                    </td>
+                    <td>
+                        {{ i.Customer.Name }}
+                        <a class="btn btn-success btn-xs disabled" ng-show="i.Customer.IsPremium" title="Premium">P</a>
+                        <a class="btn btn-warning btn-xs disabled" ng-hide="i.Customer.IsPremium" title="Regular">R</a>
+
+                    </td>
+                    <td>
+                        {{ i.Details }}
+                    </td>
+                    <td>
+                        {{ i.InvoiceDate }}
+                    </td>
+                    <td>
+                        {{ i.DueDate }}
+                    </td>
+                    <td>
+                        {{ i.Balance }}
+                    </td>
+                    <td>
+                        <a class="btn btn-success btn-xs disabled" ng-show="i.Status == 5"> {{ i.StatusStr }}</a>
+                        <a class="btn btn-warning btn-xs disabled" ng-show="i.Status == 0  || i.Status == 4"> {{ i.StatusStr }}</a>
+                        <a class="btn btn-danger btn-xs disabled" ng-show="i.Status == 6"> {{ i.StatusStr }}</a>
+                        <a class="btn btn-default btn-xs disabled" ng-show="i.Status == 3 || i.Status == 1 || i.Status == 2"> {{ i.StatusStr }}</a>
+
+                    </td>
+                    @*<td>
+                            <a class="btn btn-success btn-xs" href="~/Home/Invoice/{{i.Number}}">Details &raquo;</a>
+                        </td>*@
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <form class="form-horizontal">
+        <a class="btn btn-primary btn-sm" ng-click="CalculateInvoices()">Calculate all</a>
+        <a class="btn btn-primary btn-sm" ng-click="SendInvoices()">Send all</a>
+
+    </form>
+</div>

@@ -1,0 +1,45 @@
+﻿
+var fontEndAngularApp = angular.module('fontEndAngularApp', ['ngResource']
+   // , ['ngTouch', 'hmTouchEvents']
+    );
+
+
+// Create a new service as a factory.
+fontEndAngularApp.factory('opExtService', opExtServiceConstructor);
+
+
+/**
+ * Factory constructor.
+ *
+ * @returns {Object} exposed functions
+ */
+/* @ngInject */
+function opExtServiceConstructor() {
+
+    //var urisApi = "//localhost:54323";
+    var urisApi = "//bmz.dlinkddns.com/WebParkingInvoice";
+
+    // Expose interface.
+    return {
+        getUri: normalizeGetUri
+    };
+
+    /*
+     * Private methods implementation.
+     */
+
+    /**
+     * Get a normalized URI to a resource based on the configured environment.
+     *
+     * @param {String} path to resource
+     * @param {String} baseUri to where the resource lives
+     * @returns {String} normalized URI to resource
+     */
+    function normalizeGetUri(path, baseUri) {
+        return (baseUri || urisApi) + path;
+    }
+}
+
+
+
+

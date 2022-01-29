@@ -1,0 +1,68 @@
+﻿
+
+var appModule = angular.module('fontEndAngularApp');
+appModule.controller('IndexController', IndexController);
+
+
+/* @ngInject */
+function IndexController($scope, apiTestService) {
+
+    // LOG
+    console.debug('function IndexController', new Date());
+
+    // INIT
+    {
+        $scope.ParkInfo = {Items: []};
+    }
+
+    // Deactivate UI
+    $scope.disabled = true;
+
+    // CALL API
+    var q = apiTestService.getParkInfo();
+
+
+    q.$promise.then(function (response) {
+
+        // SHOW ALARM
+        //printObject(response);
+
+     
+
+        $scope.ParkInfo.Items = [];
+        for (var i = 0; i < response.length; i++) {
+            $scope.ParkInfo.Items.push(response[i]);
+        }
+
+        // LOG
+        console.debug('$scope.ParkInfo.Items', $scope.ParkInfo.Items);
+
+        // Activate UI
+        $scope.disabled = false;
+
+
+    }).catch(function (reason) {
+
+        // SHOW ALARM
+        printObject(reason);
+
+        // Activate UI
+        $scope.disabled = false;
+    });;
+
+}
+
+/* @ngInject */
+function printObject(o) {
+    var out = '';
+    for (var p in o) {
+        out += p + ': ' + o[p] + '\n';
+    }
+    alert(out);
+}
+
+
+
+
+
+

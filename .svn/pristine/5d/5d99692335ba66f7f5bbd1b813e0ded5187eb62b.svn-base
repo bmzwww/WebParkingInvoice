@@ -1,0 +1,10 @@
+﻿
+
+<div class="well">
+    <h2>@ViewBag.Title.</h2>
+    <p class="lead">@ViewBag.Message</p>
+    <form class="form-horizontal">
+        <a href="~/" class="btn btn-primary btn-sm">Show customers &raquo;</a>
+        <a href="~/Home/Invoices/" class="btn btn-primary btn-sm">See Invoices &raquo;</a>
+    </form>
+</div>

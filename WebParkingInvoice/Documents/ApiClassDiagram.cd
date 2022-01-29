@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WebParkingInvoice.Controllers.HomeController">
+    <Position X="8.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAEAAAAAAAAAAAAAAAAAAAAABAAAAAAEAAEAECAAAQA=</HashCode>
+      <FileName>Controllers\HomeController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_iCustomersService" />
+      <Field Name="_iInvoiceService" />
+      <Field Name="_iParkInfoService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebParkingInvoice.Controllers.CustomersApiController">
+    <Position X="14.5" Y="6.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\CustomersApiController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_iCustomersService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebParkingInvoice.Controllers.InvoiceCalculationApiController">
+    <Position X="5.25" Y="3.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\InvoiceCalculationApiController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_iInvoiceService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebParkingInvoice.Controllers.InvoicesApiController">
+    <Position X="11.5" Y="3.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\InvoicesApiController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_iInvoiceService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebParkingInvoice.Controllers.InvoiceSenderApiController">
+    <Position X="8.25" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\InvoiceSenderApiController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_iInvoiceService" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebParkingInvoice.Controllers.ParkingApiController">
+    <Position X="2.5" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Controllers\ParkingApiController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_parkInfoService" />
+    </ShowAsAssociation>
+  </Class>
+  <Interface Name="WebParkingInvoice.Services.ICustomersService">
+    <Position X="11.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Services\CustomerService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WebParkingInvoice.Services.IInvoiceService">
+    <Position X="8.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAIAAAAAAABAAAAAAAAAAACAAAAABA=</HashCode>
+      <FileName>Services\InvoiceService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WebParkingInvoice.Services.IParkInfoService">
+    <Position X="5.5" Y="6.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAIAAAAAIAAAA=</HashCode>
+      <FileName>Services\ParkInfoService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

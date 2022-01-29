@@ -1,0 +1,79 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using WebParkingInvoice.Models;
+using WebParkingInvoice.Static;
+
+namespace WebParkingInvoice.Controllers
+{
+    public class ParkingApiController : ApiController
+    {
+
+        public ParkingApiController()
+        {
+            if (CustomersStorage.Customers == null)
+            {
+                CustomersStorage.Init();
+            }
+
+            if (ParkInfoStorage.ParkInfoCollection == null)
+            {
+                ParkInfoStorage.Init();
+                
+            }
+        }
+
+       
+        public List<ParkInfoModel> Get()
+        {
+            var info = new DateTimeFormatInfo();
+
+            var q =  ParkInfoStorage.ParkInfoCollection.GroupBy(g => new {g.Customer, g.ParkHouse, g.PeriodStart.Month}).Select(s => new ParkInfoModel()
+            {
+                Customer = s.Key.Customer,
+                DayAmount = s.Sum(s2 => s2.DayAmount),
+                NightAmount = s.Sum(s2 => s2.NightAmount),
+                ParkHouse = s.Key.ParkHouse,
+                Details = info.GetMonthName(s.Key.Month)
+            }).ToList();
+            return q;
+
+
+        }
+
+        public List<ParkInfoModel> Get(int id)
+        {
+            return ParkInfoStorage.ParkInfoCollection.Where(w => w.Customer.ID == id).ToList();
+        }
+        //// GET api/values
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
+
+        //// GET api/values/5
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
+
+        //// POST api/values
+        //public void Post([FromBody]string value)
+        //{
+        //}
+
+        //// PUT api/values/5
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
+
+        //// DELETE api/values/5
+        //public void Delete(int id)
+        //{
+        //}
+    }
+}

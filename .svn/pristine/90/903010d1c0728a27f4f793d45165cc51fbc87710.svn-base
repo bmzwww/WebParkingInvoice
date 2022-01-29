@@ -1,0 +1,149 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using WebParkingInvoice.Models;
+
+namespace WebParkingInvoice.Services
+{
+    public interface IHoursCalculationService
+    {
+       // AmountModel CalculateAmount(DateTime randomDate1, DateTime randomDate2);
+        List<ParkInfoPriceModel> CalculateIntervals(ParkInfoModel model);
+
+        bool IntersectsWith(DateTime start1, DateTime end1, DateTime start2, DateTime end2);
+
+        int GetAmountFromHours(double hours);
+    }
+
+    public class HoursCalculationService : IHoursCalculationService
+    {
+        public List<ParkInfoPriceModel> CalculateIntervals(ParkInfoModel model)
+        {
+
+            var randomDate1 = model.PeriodStart;
+            var randomDate2 = model.PeriodEnd;
+
+            var list = new List<ParkInfoPriceModel>();
+
+            while (randomDate1 < randomDate2)
+            {
+                if (randomDate1 < randomDate1.Date.AddHours(7))
+                {
+                    var p = new ParkInfoPriceModel()
+                    {
+                        ID = model.ID,
+                        PeriodStart = randomDate1,
+                        PeriodEnd = randomDate2 > randomDate1.Date.AddHours(7) ? randomDate1.Date.AddHours(7) : randomDate2,
+                        Amount = new AmountModel()
+                    };
+  
+                    p.Amount.NightHours = (p.PeriodEnd - p.PeriodStart).TotalHours;
+                    p.Amount.Night = GetAmountFromHours(p.Amount.NightHours);
+             
+
+                    list.Add(p);
+                    randomDate1 = p.PeriodEnd;
+                }
+                else
+                {
+                    if (randomDate1 < randomDate1.Date.AddHours(19))
+                    {
+                        var p = new ParkInfoPriceModel()
+                        {
+                            ID = model.ID,
+                            PeriodStart = randomDate1,
+                            PeriodEnd = randomDate2 > randomDate1.Date.AddHours(19) ? randomDate1.Date.AddHours(19) : randomDate2,
+                            Amount = new AmountModel()
+                        };
+
+
+                        p.Amount.DayHours = (p.PeriodEnd - p.PeriodStart).TotalHours;
+                        p.Amount.Day = GetAmountFromHours(p.Amount.DayHours);
+              
+                        list.Add(p);
+                        randomDate1 = p.PeriodEnd;
+                    }
+                    else
+                    {
+                        var p = new ParkInfoPriceModel()
+                        {
+                            ID = model.ID,
+                            PeriodStart = randomDate1,
+                            PeriodEnd = randomDate2 > randomDate1.Date.AddDays(1).AddHours(7) ? randomDate1.Date.AddDays(1).AddHours(7) : randomDate2,
+                            Amount = new AmountModel()
+                        };
+
+
+                        p.Amount.NightHours = (p.PeriodEnd - p.PeriodStart).TotalHours;
+                        p.Amount.Night = GetAmountFromHours(p.Amount.NightHours);
+                 
+
+                        list.Add(p);
+                        randomDate1 = p.PeriodEnd;
+                    }
+                }
+
+            }
+            //// 00:00 - 07:00
+            //if (IntersectsWith(randomDate1, randomDate2, night1Start, night1End))
+            //{
+            //    var s = randomDate1;
+            //    var e = randomDate2;
+            //    if (s < night1Start)
+            //    {
+            //        s = night1Start;
+            //    }
+            //    if (e > night1End)
+            //    {
+            //        e = night1End;
+            //    }
+            //    var h = (e - s).TotalHours;
+
+            //    nightPeriodAmount = nightPeriodAmount + GetAmountFromHours(h);
+
+            //    list.Add(new ParkInfoPriceModel { PeriodStart = s, PeriodEnd = e, Amount = new AmountModel { Night = nightPeriodAmount } });
+            //}
+
+            //// 07:00 - 19:00
+            //if (IntersectsWith(randomDate1, randomDate2, day1Start, day1End))
+            //{
+            //    var s = randomDate1;
+            //    var e = randomDate2;
+            //    if (s < day1Start)
+            //    {
+            //        s = day1Start;
+            //    }
+            //    if (e > day1End)
+            //    {
+            //        e = day1End;
+            //    }
+            //    var h = (e - s).TotalHours;
+            //    dayPeriodAmount = dayPeriodAmount + GetAmountFromHours(h);
+
+            //    list.Add(new ParkInfoPriceModel { PeriodStart = s, PeriodEnd = e, Amount = new AmountModel { Day = dayPeriodAmount } });
+            //}
+
+            return list;
+        }
+
+
+        public bool IntersectsWith(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
+        {
+            return !((end2 < start1) || (start2 > end1)); //returns true
+        }
+
+        public int GetAmountFromHours(double hours)
+        {
+            var res = 0;
+            var am = hours / 0.5;
+            var amleft = hours % 0.5;
+            res = Convert.ToInt32(am - amleft);
+            if (amleft > 0)
+            {
+                res++;
+            }
+            return res;
+        }
+    }
+}

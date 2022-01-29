@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WebParkingInvoice.Services.ParkInfoService" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAABBAAAAAAAIAAAAAIAAAA=</HashCode>
+      <FileName>Services\ParkInfoService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_iCustomersService" />
+      <Field Name="_iHoursCalculationService" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="WebParkingInvoice.Services.InvoiceService" BaseTypeListCollapsed="true">
+    <Position X="9" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAEAAAIAAAAAAABAAAAAAAAAAACEAAAABA=</HashCode>
+      <FileName>Services\InvoiceService.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="_iParkInfoService" />
+      <Field Name="_iHoursCalculationService" />
+      <Field Name="_iCalculationService" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="WebParkingInvoice.Services.IParkInfoService">
+    <Position X="12" Y="6.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAIAAAAAIAAAA=</HashCode>
+      <FileName>Services\ParkInfoService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WebParkingInvoice.Services.ICustomersService">
+    <Position X="2.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Services\CustomerService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WebParkingInvoice.Services.ICalculationService">
+    <Position X="9" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAA=</HashCode>
+      <FileName>Services\CalculationService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="WebParkingInvoice.Services.IHoursCalculationService">
+    <Position X="5.75" Y="6.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAQAAAAQAAAgAAAAAA=</HashCode>
+      <FileName>Services\HoursCalculationService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

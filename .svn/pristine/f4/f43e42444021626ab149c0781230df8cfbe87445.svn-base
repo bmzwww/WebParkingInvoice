@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using WebParkingInvoice.Models;
+using WebParkingInvoice.Services;
+
+namespace TestConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            var service = new HoursCalculationService();
+            var amount1 = service.CalculateIntervals(new ParkInfoModel(){PeriodStart = DateTime.Now, PeriodEnd = DateTime.Now.AddHours(1)});
+            var amount2 = service.CalculateIntervals(new ParkInfoModel() { PeriodStart = DateTime.Now, PeriodEnd = DateTime.Now.AddDays(1) }); 
+            var amount3 = service.CalculateIntervals(new ParkInfoModel() { PeriodStart = DateTime.Now, PeriodEnd = DateTime.Now.AddDays(2) });
+        }
+    }
+}

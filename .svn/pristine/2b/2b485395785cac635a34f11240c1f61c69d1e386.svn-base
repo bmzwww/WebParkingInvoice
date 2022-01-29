@@ -1,0 +1,47 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Web;
+using WebParkingInvoice.Models;
+
+namespace WebParkingInvoice.Static
+{
+    public static class InvoicesStorage
+    {
+        public static List<InvoiceModel> Invoices { get; set; }
+
+
+        public static void Init()
+        {
+            if (Invoices == null)
+            {
+                var list = new List<InvoiceModel>();
+                var info = new DateTimeFormatInfo();
+                var rnd = new Random();
+
+                list = ParkInfoStorage.ParkInfoCollection.GroupBy(g => new { g.Customer, g.PeriodStart.Month, g.PeriodStart.Year }).Select(s => new InvoiceModel()
+                {
+                    Customer = s.Key.Customer,
+                    Details = String.Format(@"Payment for {0} {1}", s.Key.Year, info.GetMonthName(s.Key.Month)),
+                    Balance = 0,
+                    BalanceStr = "0.00 EUR",
+                    DueDate = null,
+                    InvoiceDate = null,
+                    Number = String.Format(@"{0}{1}S{2}", s.Key.Year.ToString("0000"), info.GetMonthName(s.Key.Month).Substring(0,3).ToUpper(), rnd.Next(1, 9999).ToString("0000")),
+                    Status = InvoiceStatus.Draft,
+                    StatusStr = InvoiceStatus.Draft.ToString()
+                }).ToList();
+
+                for (var i = 0; i < list.Count; i++)
+                {
+                    list[i].ID = i + 1;
+                }
+
+                Invoices = list;
+            }
+        }
+
+        
+    }
+}

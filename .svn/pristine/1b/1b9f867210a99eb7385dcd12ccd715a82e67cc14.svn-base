@@ -1,0 +1,187 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using WebParkingInvoice.Models;
+
+namespace WebParkingInvoice.Static
+{
+    public static class ParkInfoStorage
+    {
+        public static List<ParkInfoModel> ParkInfoCollection { get; set; }
+
+
+        public static void Init()
+        {
+            if (ParkInfoCollection == null)
+            {
+                var list = new List<ParkInfoModel>();
+                var defaultParkHouse = new ParkHouseModel() { ID = 1, Address = "Tallinn", Name = "ParkHouse 1" };
+
+                var rnd = new Random();
+
+                var cur = DateTime.Now.Date;
+                cur = cur.AddDays(-cur.Day);
+
+                var maxCycle = rnd.Next(10, 100);
+
+                while (list.Count < maxCycle)
+                {
+                    var customerPos = rnd.Next(0, CustomersStorage.Customers.Count);
+                    var customer = CustomersStorage.Customers[customerPos];
+
+                    var day1 = rnd.Next(1, cur.Day);
+                    var h1 = rnd.Next(1, 24);
+                    var h2 = rnd.Next(1, 24);
+                    var m1 = rnd.Next(1, 60);
+                    var m2 = rnd.Next(1, 60);
+
+                    var randomDate1 = new DateTime(cur.Year, cur.Month, day1, h1, m1, 0, DateTimeKind.Local);
+                    randomDate1 = randomDate1.ToLocalTime();
+                    var randomDate2 = new DateTime(cur.Year, cur.Month, day1, h2, m2, 0, DateTimeKind.Local);
+                     randomDate2 = randomDate2.ToLocalTime();
+                    if (randomDate1 > randomDate2)
+                    {
+                        var x = randomDate1;
+                        randomDate1 = randomDate2;
+                        randomDate2 = x;
+                    }
+
+                    var intersect = false;
+
+                    foreach (var t in list.Where(w => customer == w.Customer))
+                    {
+                        if (IntersectsWith(randomDate1, randomDate2, t.PeriodStart, t.PeriodEnd))
+                        {
+                            intersect = true;
+                            break;
+                        }
+                    }
+
+                    if (!intersect)
+                    {
+                        var nightPeriodAmount = 0;
+                        var dayPeriodAmount = 0;
+
+
+                        var night1Start = randomDate1.Date;
+                        var night1End = randomDate1.Date.AddHours(7);
+
+                        var day1Start = night1End;
+                        var day1End = randomDate1.Date.AddHours(19);
+
+                        var night2Start = day1End;
+                        var night2End = randomDate1.Date.AddDays(1);
+
+                        if (IntersectsWith(randomDate1, randomDate2, night1Start, night1End))
+                        {
+                            var s = randomDate1;
+                            var e = randomDate2;
+                            if (s < night1Start)
+                            {
+                                s = night1Start;
+                            }
+                            if (e > night1End)
+                            {
+                                e = night1End;
+                            }
+                            var h = (e - s).TotalHours;
+                            nightPeriodAmount = nightPeriodAmount + GetHalfHoursFromDoubleHours(h);
+                        }
+                        if (IntersectsWith(randomDate1, randomDate2, day1Start, day1End))
+                        {
+                            var s = randomDate1;
+                            var e = randomDate2;
+                            if (s < day1Start)
+                            {
+                                s = day1Start;
+                            }
+                            if (e > day1End)
+                            {
+                                e = day1End;
+                            }
+                            var h = (e - s).TotalHours;
+                            dayPeriodAmount = dayPeriodAmount + GetHalfHoursFromDoubleHours(h);
+                        }
+                        if (IntersectsWith(randomDate1, randomDate2, night2Start, night2End))
+                        {
+                            var s = randomDate1;
+                            var e = randomDate2;
+                            if (s < night2Start)
+                            {
+                                s = night2Start;
+                            }
+                            if (e > night2End)
+                            {
+                                e = night2End;
+                            }
+                            var h = (e - s).TotalHours;
+                            nightPeriodAmount = nightPeriodAmount + GetHalfHoursFromDoubleHours(h);
+                        }
+                        //var endNight = randomDate1.Date.AddHours(7);
+
+                        //if (randomDate1 > randomDate1.Date.AddDays(-1).AddHours(19) && randomDate1 < endNight)
+                        //{
+                        //    if (endNight > randomDate2)
+                        //    {
+                        //        endNight = randomDate2;
+                        //    }
+                       
+                        //    nightPeriodAmount = GetHalfHoursFromDoubleHours( (endNight - randomDate1).TotalHours);
+                        //}
+
+                   
+
+                        list.Add(new ParkInfoModel()
+                        {
+                            ID = list.Count + 1,
+                            Customer = customer,
+                            ParkHouse = defaultParkHouse,
+                            PeriodStart = randomDate1,
+                            PeriodEnd = randomDate2,
+                            DayAmount = dayPeriodAmount,
+                            NightAmount =  nightPeriodAmount
+                        });
+                    }
+                }
+
+                //ParkInfoSample.Add(new ParkInfoModel
+                //{
+                //    ID = 1,
+                //    AgreementCode = "AGR00001",
+                //    ParkHouse = defaultParkHouse,
+                //    PeriodStart = DateTime.Now.AddMonths(-1).AddDays(10).AddHours(-1).AddMinutes(-15),
+                //    PeriodEnd = DateTime.Now.AddMonths(-1).AddDays(10),
+                //});
+
+                //ParkInfoSample.Add(new ParkInfoModel
+                //{
+                //    ID = 2,
+                //    AgreementCode = "AGR00002",
+                //    ParkHouse = defaultParkHouse,
+                //    PeriodStart = DateTime.Now.AddMonths(-1).AddDays(10).AddHours(-1).AddMinutes(-15),
+                //    PeriodEnd = DateTime.Now.AddMonths(-1).AddDays(10),
+                //});
+                ParkInfoCollection = list.OrderBy(o => o.PeriodStart).ToList();
+            }
+        }
+
+        public static bool IntersectsWith(DateTime start1, DateTime end1, DateTime start2, DateTime end2)
+        {
+            return !((end2 < start1) || (start2 > end1)); //returns true
+        }
+
+        public static int GetHalfHoursFromDoubleHours(double hours)
+        {
+            var res = 0;
+            var am = hours / 0.5;
+            var amleft = hours % 0.5;
+            res = Convert.ToInt32(am - amleft);
+            if (amleft > 0)
+            {
+                res++;
+            }
+            return res;
+        }
+    }
+}

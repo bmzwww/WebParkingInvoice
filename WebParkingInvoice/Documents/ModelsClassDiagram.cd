@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="WebParkingInvoice.Models.CustomerModel">
+    <Position X="6.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAgAAAAAAAQAQAAAAAACACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\CustomerModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebParkingInvoice.Models.AmountModel">
+    <Position X="1" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAIAiACAAAAAAAAAEAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Models\AmountModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebParkingInvoice.Models.InvoiceModel">
+    <Position X="7.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAEBQABiCBAAEgEgQAAAAAAAACAAAAAAAAAIAA=</HashCode>
+      <FileName>Models\InvoiceModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Status" />
+      <Property Name="Customer" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Items" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="WebParkingInvoice.Models.ParkHouseModel">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAQAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ParkHouseModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WebParkingInvoice.Models.ParkInfoModel">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAABgAAAQAAAAACAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Models\ParkInfoModel.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ParkHouse" />
+      <Property Name="Amount" />
+      <Property Name="Customer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="WebParkingInvoice.Models.ParkInfoPriceModel">
+    <Position X="4" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAQAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ParkInfoPriceModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="WebParkingInvoice.Models.InvoiceStatus">
+    <Position X="10.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAEAAAAABQIAAAAAAgAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Models\InvoiceStatus.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

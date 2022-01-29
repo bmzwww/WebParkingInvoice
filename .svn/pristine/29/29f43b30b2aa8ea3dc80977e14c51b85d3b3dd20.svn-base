@@ -1,0 +1,127 @@
+﻿
+
+var appModule = angular.module('fontEndAngularApp');
+appModule.controller('InvoicesController', InvoicesController);
+
+
+/* @ngInject */
+function InvoicesController($scope, $log, apiTestService) {
+
+    // LOG
+    $log.info('function InvoicesController', new Date());
+
+
+    // INIT
+    {
+        $scope.Invoices = [];
+    }
+
+    // Deactivate UI
+    $scope.disabled = true;
+
+    // CALL API
+    var q = apiTestService.getInvoices();
+
+
+    q.$promise.then(function (response) {
+
+        // SHOW ALARM
+        //printObject(response);
+
+     
+
+        $scope.Invoices = [];
+        for (var i = 0; i < response.length; i++) {
+
+            var invoice = {};
+            var p = response[i];
+            invoice.ID = p.ID;
+            //parkInfo.ParkHouse = p.ParkHouse;
+            invoice.Customer = p.Customer;
+            invoice.Number = p.Number;
+            invoice.Balance = p.BalanceStr;
+            invoice.InvoiceDateNet = p.InvoiceDate;
+            invoice.DueDateNet = p.DueDate;
+            invoice.Status = p.Status;
+            invoice.StatusStr = p.StatusStr;
+
+            if (p.DueDate != null) {
+                invoice.InvoiceDatetJS = new Date(Date.parse(invoice.InvoiceDateNet));
+                invoice.DueDateJs = new Date(Date.parse(invoice.DueDateNet));
+
+                invoice.InvoiceDate = DateToString(invoice.InvoiceDatetJS);
+                invoice.DueDate = DateToString(invoice.DueDateJs);
+            }
+            //parkInfo.periodStartNet = p.PeriodStart;
+            //parkInfo.periodEndNet = p.PeriodEnd;
+
+            //parkInfo.PeriodStartJS = new Date(Date.parse(parkInfo.periodStartNet));
+            //parkInfo.PeriodEndJs = new Date(Date.parse(parkInfo.periodEndNet));
+
+            //parkInfo.PeriodStart = DateToString(parkInfo.PeriodStartJS);
+            //parkInfo.PeriodEnd = DateToString(parkInfo.PeriodEndJs);
+
+            //parkInfo.DayAmount = p.DayAmount;
+            //parkInfo.NightAmount = p.NightAmount;
+
+            //public long ID { get; set; }
+            //public CustomerModel Customer { get; set; }
+            //public string Number { get; set; }
+            //public double Balance { get; set; }
+            //public string Details { get; set; }
+            //public string BalanceStr { get; set; }
+            //public DateTime? InvoiceDate { get; set; }
+            //public DateTime? DueDate { get; set; }
+            //public InvoiceStatus Status { get; set; }
+
+            invoice.Details = p.Details;
+            
+            $scope.Invoices.push(invoice);
+        }
+
+        // LOG
+        $log.info('$scope.Invoices', $scope.Invoices);
+
+        // Activate UI
+        $scope.disabled = false;
+
+
+    }).catch(function (reason) {
+
+        // SHOW ALARM
+        printObject(reason);
+
+        // Activate UI
+        $scope.disabled = false;
+    });;
+
+}
+
+/* @ngInject */
+function printObject(o) {
+    var out = '';
+    for (var p in o) {
+        out += p + ': ' + o[p] + '\n';
+    }
+    alert(out);
+}
+
+/* @ngInject */
+function DateToString(d) {
+    var str = "";
+
+    str = zeroPad(d.getFullYear(),1000) + "." + zeroPad((d.getMonth() + 1),10) + "." + zeroPad(d.getDate(),10);
+
+    return str;
+}
+
+/* @ngInject */
+function zeroPad(nr, base) {
+    var len = (String(base).length - String(nr).length) + 1;
+    return len > 0 ? new Array(len).join('0') + nr : nr;
+}
+
+
+
+
+

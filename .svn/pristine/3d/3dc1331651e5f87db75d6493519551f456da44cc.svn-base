@@ -1,0 +1,59 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using WebParkingInvoice.Models;
+using WebParkingInvoice.Services;
+using WebParkingInvoice.Static;
+
+namespace WebParkingInvoice.Controllers
+{
+    public class ParkingApiController : ApiController
+    {
+        IParkInfoService _parkInfoService;
+
+        public ParkingApiController(IParkInfoService parkInfoService)
+        {
+            _parkInfoService = parkInfoService;
+        }
+
+        public List<ParkInfoModel> Get()
+        {
+            return _parkInfoService.GetParkInfoOverview();
+        }
+
+        public List<ParkInfoModel> Get(int id)
+        {
+            return _parkInfoService.GetCustomerParkInfo(id);
+        }
+        //// GET api/values
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
+
+        //// GET api/values/5
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
+
+        //// POST api/values
+        //public void Post([FromBody]string value)
+        //{
+        //}
+
+        //// PUT api/values/5
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
+
+        //// DELETE api/values/5
+        //public void Delete(int id)
+        //{
+        //}
+    }
+}

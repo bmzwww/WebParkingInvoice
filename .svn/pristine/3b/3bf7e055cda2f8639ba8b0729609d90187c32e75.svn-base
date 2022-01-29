@@ -1,0 +1,146 @@
+﻿
+
+var appModule = angular.module('fontEndAngularApp');
+appModule.controller('InvoiceController', InvoiceController);
+
+
+/* @ngInject */
+function InvoiceController($scope, $log, apiTestService) {
+
+    // LOG
+    $log.info('function InvoiceController', new Date());
+
+
+    // INIT
+    {
+        $scope.Invoice = {};
+        $scope.Invoice.Items = [];
+    }
+
+    // Number
+    var el = document.createElement('a');
+    el.href = window.location.href;
+    var splitPath = el.pathname.split('/');
+    var number = splitPath[splitPath.length - 1];
+    $log.info('number', number);
+
+    // Deactivate UI
+    $scope.disabled = true;
+
+    // CALL API
+    var q = apiTestService.getInvoice(number);
+
+
+    q.$promise.then(function (response) {
+
+        // SHOW ALARM
+        //printObject(response);
+
+
+        $scope.Invoice = {};
+        $scope.Invoice.Items = [];
+        $scope.Invoice.Balance = response.Balance;
+        $scope.Invoice.BalanceStr = response.BalanceStr;
+        $scope.Invoice.TaxStr = response.TaxStr;
+        $scope.Invoice.PriceStr = response.PriceStr;
+        $scope.Invoice.TaxAmountStr = response.TaxAmountStr;
+
+
+
+        //                @*// Total
+        //        invoice.Price = invoice.Items.Sum(s => s.Price);
+        //invoice.PriceStr = invoice.Price.ToString("0.00") + " EUR";
+
+        //invoice.TaxAmount = invoice.Price * Tax;
+        //invoice.TaxAmountStr = invoice.TaxAmount.ToString("0.00") + " EUR";
+
+        //invoice.Balance = invoice.TaxAmount + invoice.Price;
+        //invoice.BalanceStr = invoice.Balance.ToString("0.00") + " EUR";
+
+        //invoice.TaxStr = ((int)(Tax * 100)).ToString() + " %";
+
+        //invoice.InvoiceDate = DateTime.Now.Date;
+        //invoice.DueDate = invoice.InvoiceDate.Value.AddDays(21);*@
+
+        for (var i = 0; i < response.Items.length; i++) {
+
+            var parkInfoPrice = {};
+            var p = response.Items[i];
+            parkInfoPrice.ID = p.ID;
+            //parkInfo.ParkHouse = p.ParkHouse;
+       
+
+            //parkInfo.periodStartNet = p.PeriodStart;
+            //parkInfo.periodEndNet = p.PeriodEnd;
+
+            //parkInfo.PeriodStartJS = new Date(Date.parse(parkInfo.periodStartNet));
+            //parkInfo.PeriodEndJs = new Date(Date.parse(parkInfo.periodEndNet));
+
+            //parkInfo.PeriodStart = DateToString(parkInfo.PeriodStartJS);
+            //parkInfo.PeriodEnd = DateToString(parkInfo.PeriodEndJs);
+
+            //parkInfo.DayAmount = p.DayAmount;
+            //parkInfo.NightAmount = p.NightAmount;
+
+            //public long ID { get; set; }
+            //public CustomerModel Customer { get; set; }
+            //public string Number { get; set; }
+            //public double Balance { get; set; }
+            //public string Details { get; set; }
+            //public string BalanceStr { get; set; }
+            //public DateTime? InvoiceDate { get; set; }
+            //public DateTime? DueDate { get; set; }
+            //public InvoiceStatus Status { get; set; }
+            parkInfoPrice.PriceStr = p.PriceStr;
+            parkInfoPrice.Details = p.Details;
+            parkInfoPrice.Rate = p.Rate;
+            parkInfoPrice.Amount = p.Amount.Day + p.Amount.Night;
+            $scope.Invoice.Items.push(parkInfoPrice);
+        }
+
+        // LOG
+        $log.info('$scope.Invoice.Items', $scope.Invoice.Items);
+
+        // Activate UI
+        $scope.disabled = false;
+
+
+    }).catch(function (reason) {
+
+        // SHOW ALARM
+        printObject(reason);
+
+        // Activate UI
+        $scope.disabled = false;
+    });;
+
+}
+
+/* @ngInject */
+function printObject(o) {
+    var out = '';
+    for (var p in o) {
+        out += p + ': ' + o[p] + '\n';
+    }
+    alert(out);
+}
+
+/* @ngInject */
+function DateToString(d) {
+    var str = "";
+
+    str = zeroPad(d.getFullYear(),1000) + "." + zeroPad((d.getMonth() + 1),10) + "." + zeroPad(d.getDate(),10);
+
+    return str;
+}
+
+/* @ngInject */
+function zeroPad(nr, base) {
+    var len = (String(base).length - String(nr).length) + 1;
+    return len > 0 ? new Array(len).join('0') + nr : nr;
+}
+
+
+
+
+

@@ -1,0 +1,104 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Web;
+using WebParkingInvoice.Models;
+using WebParkingInvoice.Static;
+
+namespace WebParkingInvoice.Services
+{
+    public interface IInvoiceService
+    {
+        void DemoInit();
+        List<InvoiceModel> GetInvoices();
+        InvoiceModel GetInvoiceCalculation(string id);
+    }
+
+    public class InvoiceService : IInvoiceService
+    {
+        IParkInfoService _iParkInfoService;
+        IInvoiceCalculationService _iInvoiceCalculationService;
+        IHoursCalculationService _iHoursCalculationService;
+
+        public InvoiceService(IParkInfoService iParkInfoService, IInvoiceCalculationService iInvoiceCalculationService, IHoursCalculationService iHoursCalculationService)
+        {
+            _iParkInfoService = iParkInfoService;
+            _iInvoiceCalculationService = iInvoiceCalculationService;
+            _iHoursCalculationService = iHoursCalculationService;
+        }
+
+        public List<InvoiceModel> GetInvoices()
+        {
+            if (InvoicesStorage.Invoices == null)
+            {
+                DemoInit();
+            }
+
+            return InvoicesStorage.Invoices.ToList();
+        }
+
+        //public InvoiceModel GetInvoiceDetails(string id)
+        //{
+        //    if (InvoicesStorage.Invoices == null)
+        //    {
+        //        DemoInit();
+        //    }
+
+        //    return InvoicesStorage.Invoices.FirstOrDefault(w => w.Number == id);
+        //}
+
+        public InvoiceModel GetInvoiceCalculation(string id)
+        {
+            if (InvoicesStorage.Invoices == null)
+            {
+                DemoInit();
+            }
+
+            var invoice = InvoicesStorage.Invoices.FirstOrDefault(w => w.Number == id);
+
+            if (invoice.Status == InvoiceStatus.Draft)
+            {
+                invoice = _iInvoiceCalculationService.CalculateInvoice(invoice);
+            }
+
+            return invoice;
+        }
+
+        public void DemoInit()
+        {
+            if (ParkInfoStorage.ParkInfoCollection == null)
+            {
+                _iParkInfoService.DemoInit();
+            }
+
+            if (InvoicesStorage.Invoices == null)
+            {
+                var list = new List<InvoiceModel>();
+                var info = new DateTimeFormatInfo();
+                var rnd = new Random();
+
+                list = ParkInfoStorage.ParkInfoCollection.GroupBy(g => new { g.Customer, g.PeriodStart.Month, g.PeriodStart.Year }).Select(s => new InvoiceModel()
+                {
+                    Customer = s.Key.Customer,
+                    Details = String.Format(@"Payment for {0} {1}", s.Key.Year, info.GetMonthName(s.Key.Month)),
+                    Balance = 0,
+                    BalanceStr = "0.00 EUR",
+                    DueDate = null,
+                    InvoiceDate = null,
+                    Number = String.Format(@"{0}{1}S{2}", s.Key.Year.ToString("0000"), info.GetMonthName(s.Key.Month).Substring(0, 3).ToUpper(), rnd.Next(1, 9999).ToString("0000")),
+                    Status = InvoiceStatus.Draft,
+                    StatusStr = InvoiceStatus.Draft.ToString(),
+                    Items = s.SelectMany(s2 => _iHoursCalculationService.CalculateIntervals(s2)).ToList()
+                }).ToList();
+
+                for (var i = 0; i < list.Count; i++)
+                {
+                    list[i].ID = i + 1;
+                }
+
+                InvoicesStorage.Invoices = list;
+            }
+        }
+    }
+}

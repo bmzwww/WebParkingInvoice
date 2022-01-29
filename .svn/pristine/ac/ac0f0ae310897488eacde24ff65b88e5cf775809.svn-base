@@ -1,0 +1,85 @@
+﻿
+<div class="well" ng-controller="InvoicesController">
+    <h2>@ViewBag.Title</h2>
+    <p class="lead">@ViewBag.Message</p>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Invoice number
+                    </th>
+                    <th>
+                        Customer
+                    </th>
+                    <th>
+                        Details
+                    </th>
+                    <th>
+                        Invoice Date
+                    </th>
+                    <th>
+                        Due Date
+                    </th>
+                    <th>
+                        Balance
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+                    @*<th>
+                            Actions
+                        </th>*@
+                </tr>
+            </thead>
+            <tbody>
+                <tr role="row" ng-repeat="i in Invoices">
+                    <td>
+                        {{ $index + 1}}
+                    </td>
+                    <td>
+                        <a href="~/Home/Invoice/{{i.Number}}"> {{ i.Number }}</a>
+                    </td>
+                    <td>
+                        {{ i.Customer.Name }}
+                        <a class="btn btn-success btn-xs disabled" ng-show="i.Customer.IsPremium" title="Premium">P</a>
+                        <a class="btn btn-warning btn-xs disabled" ng-hide="i.Customer.IsPremium" title="Regular">R</a>
+
+                    </td>
+                    <td>
+                        {{ i.Details }}
+                    </td>
+                    <td>
+                        {{ i.InvoiceDate }}
+                    </td>
+                    <td>
+                        {{ i.DueDate }}
+                    </td>
+                    <td>
+                        {{ i.Balance }}
+                    </td>
+                    <td>
+                        <a class="btn btn-success btn-xs disabled" ng-show="i.Status == 5"> {{ i.StatusStr }}</a>
+                        <a class="btn btn-warning btn-xs disabled" ng-show="i.Status == 0  || i.Status == 4"> {{ i.StatusStr }}</a>
+                        <a class="btn btn-danger btn-xs disabled" ng-show="i.Status == 6"> {{ i.StatusStr }}</a>
+                        <a class="btn btn-default btn-xs disabled" ng-show="i.Status == 3"> {{ i.StatusStr }}</a>
+                        <a class="btn btn-primary btn-xs disabled" ng-show="i.Status == 1 || i.Status == 2"> {{ i.StatusStr }}</a>
+                    </td>
+                    @*<td>
+                            <a class="btn btn-success btn-xs" href="~/Home/Invoice/{{i.Number}}">Details &raquo;</a>
+                        </td>*@
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <form class="form-horizontal">
+        <a class="btn btn-success btn-sm" ng-click="CalculateInvoices()">Calculate all</a>
+        <a class="btn btn-success btn-sm" ng-click="SendInvoices()">Send all</a>
+
+    </form>
+</div>

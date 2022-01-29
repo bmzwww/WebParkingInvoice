@@ -1,0 +1,101 @@
+﻿
+
+<div class="well">
+    <h2>@ViewBag.Title</h2>
+    <p class="lead">@ViewBag.Message</p>
+
+    
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Invoice number
+                </th>
+                <th>
+                    Customer
+                </th>
+                <th>
+                    Car number
+                </th>
+                <th>
+                    Invoice Date
+                </th>
+                <th>
+                    Balance
+                </th>
+                <th>
+                    Due Date
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr role="row">
+                <td>
+                    1
+                </td>
+                <td>
+                    JAN012016330AVA
+                </td>
+                <td>
+                    Customer 1
+                </td>
+                <td>
+                    330 AVA
+                </td>
+                <td>
+                    03.02.2016
+                </td>
+                <td>
+                    1 EUR
+                </td>
+                <td>
+                    23.02.2016
+                </td>
+                <td>
+                    Not paid
+                </td>
+                <td>
+                    <a class="btn btn-success btn-xs">Details &raquo;</a>
+                </td>
+            </tr>
+            <tr role="row">
+                <td>
+                    1
+                </td>
+                <td>
+                    JAN012016456BGN
+                </td>
+                <td>
+                    Customer 1
+                </td>
+                <td>
+                    456 BGN
+                </td>
+                <td>
+                    03.02.2016
+                </td>
+                <td>
+                    1 EUR
+                </td>
+                <td>
+                    23.02.2016
+                </td>
+                <td>
+                    Not paid
+                </td>
+                <td>
+                    <a class="btn btn-success btn-xs">Details &raquo;</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

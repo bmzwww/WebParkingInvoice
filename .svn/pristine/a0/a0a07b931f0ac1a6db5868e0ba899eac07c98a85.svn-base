@@ -1,0 +1,208 @@
+﻿
+
+<div class="well">
+    <h2> @ViewBag.Title</h2>
+    <p class="lead">@ViewBag.Message</p>
+    <h3>
+        Parking info
+    </h3>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Customer
+                </th>
+                <th>
+                    Place
+                </th>
+                <th>
+                    Day/Night
+                </th>
+                <th>
+                    Start
+                </th>
+                <th>
+                    End
+                </th>
+                <th>
+                    Rate
+                </th>
+                <th>
+                    Amount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr role="row">
+                <td>
+                    1
+                </td>
+                <td>
+                    ParkHouse 1
+                </td>
+                <td>
+                    Day
+                </td>
+                <td>
+                    10-02-2016 08:00
+                </td>
+                <td>
+                    10-02-2016 09:45
+                </td>
+                <td>
+                    4
+                </td>
+                <td>
+                    1.50 EUR
+                </td>
+                <td>
+                    6.00 EUR
+                </td>
+            </tr>
+            <tr role="row">
+                <td>
+                    1
+                </td>
+                <td>
+                    ParkHouse 1
+                </td>
+                <td>
+                    Day
+                </td>
+                <td>
+                    10-02-2016 08:00
+                </td>
+                <td>
+                    10-02-2016 19:00
+                </td>
+                <td>
+                    52
+                </td>
+                <td>
+                    1.50 EUR
+                </td>
+                <td>
+                    6.00 EUR
+                </td>
+            </tr>
+            <tr role="row">
+                <td>
+                    1
+                </td>
+                <td>
+                    ParkHouse 1
+                </td>
+                <td>
+                    Night
+                </td>
+                <td>
+                    10-02-2016 19:00
+                </td>
+                <td>
+                    11-02-2016 07:00
+                </td>
+                <td>
+                    52
+                </td>
+                <td>
+                    1.00 EUR
+                </td>
+                <td>
+                    6.00 EUR
+                </td>
+            </tr>
+            <tr role="row">
+                <td>
+                    1
+                </td>
+                <td>
+                    ParkHouse 1
+                </td>
+                <td>
+                    Day
+                </td>
+                <td>
+                    11-02-2016 07:00
+                </td>
+                <td>
+                    11-02-2016 09:45
+                </td>
+                <td>
+                    52
+                </td>
+                <td>
+                    1.50 EUR
+                </td>
+                <td>
+                    6.00 EUR
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Personal invoices</h3>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Invoice number
+                </th>
+                <th>
+                    Period
+                </th>
+                <th>
+                    Invoice Date
+                </th>
+                <th>
+                    Due Date
+                </th>
+                <th>
+                    Balance
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr role="row">
+                <td>
+                    01
+                </td>
+                <td>
+                    IN00001
+                </td>
+                <td>
+                    01.2016
+                </td>
+                <td>
+                    03.02.2016
+                </td>
+                <td>
+                    23.02.2016
+                </td>
+                <td>
+                    16.00 EUR
+                </td>
+                <td>
+                    NOT PAID
+                </td>
+                <td>
+                    <a class="btn btn-success btn-xs">Details &raquo;</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    @*<p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+

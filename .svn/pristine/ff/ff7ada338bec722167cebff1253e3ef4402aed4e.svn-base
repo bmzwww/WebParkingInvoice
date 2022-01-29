@@ -1,0 +1,3 @@
+﻿This folder needed for store log files
+1. Change directory security add or modify IIS_IUSRS (ApplicationPoolIdentityUser)
+2. Set new rights to write and modify folder

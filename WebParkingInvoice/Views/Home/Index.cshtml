@@ -1,0 +1,55 @@
+﻿
+
+<div class="well" ng-controller="IndexController">
+    <div class="modal-backdrop" ng-show="disabled" style="-ms-opacity: 0.5; opacity: 0.5; background: white;">
+
+    </div>
+    <h2> @ViewBag.Title</h2>
+    <p class="lead">@ViewBag.Message<a class="btn btn-default btn-sm  pull-right" ng-click="RefreshData()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a></p>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well well-sm">
+                <h2>Regular cusomer</h2>
+                <p>
+                    The regular customer does not have a monthly fee.
+                </p>
+                <p>
+                    Parking fee for every started half hour:
+                    <ul>
+                        <li>
+                            1.50 EUR (from 7:00 till 19:00)
+                        </li>
+                        <li>
+                            1.00 EUR (from 19:00 till 7:00)
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6 ">
+            <div class="well well-sm">
+                <h2>Premium cusomer</h2>
+                <p>
+                    Premium user fee is 20 euros per month. Premium customers will have a cap on their invoice. If their monthly usage exceeds 300 EUR then they will be billed just 300 EUR.
+                </p>
+                <p>
+                    Parking fee for every started half hour:
+                    <ul>
+                        <li>
+                            1.00 EUR (from 7:00 till 19:00)
+                        </li>
+                        <li>
+                            0.75 EUR (from 19:00 till 7:00)
+                        </li>
+                    </ul>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <a href="~/Home/Invoices/" class="btn btn-default btn-sm">See Invoices &raquo;</a>
+    <a href="~/Home/Customers/" class="btn btn-default btn-sm">See Customers &raquo;</a>
+
+    @*<p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+

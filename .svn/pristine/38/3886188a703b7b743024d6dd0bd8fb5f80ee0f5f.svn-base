@@ -1,0 +1,26 @@
+﻿
+
+var appModule = angular.module('fontEndAngularApp');
+
+appModule.factory('apiTestResource', apiTestResource);
+
+
+/* @ngInject */
+function apiTestResource($resource, $log, opExtService) {
+
+    $log.info("1. Resource apiTestResource");
+
+    // Expose interface.
+    var q = $resource(
+      opExtService.getUri('/api/ParkingApi/GetAll/'),
+      null,
+      {
+          query: {
+              method: 'GET',
+              isArray: true
+          }
+      }
+    );
+
+    return q;
+}

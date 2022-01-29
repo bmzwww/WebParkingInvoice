@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace WebParkingInvoice.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            ViewBag.Title = "Parking information";
+            ViewBag.Message = "Here you can see a list of customers and their parking information from third party company.";
+
+            return View();
+        
+        }
+
+        public ActionResult Customer(int id)
+        {
+            var customer = Static.CustomersStorage.Customers.FirstOrDefault(w => w.ID == id);
+            
+            if (customer == null)
+            {
+             
+                    return RedirectPermanent("/");
+
+                
+            }
+
+            ViewBag.Title = String.Format("'{0}' parking information", customer.Name);
+            ViewBag.Message = "Here you can see a list of personal parking information from third party company.";
+
+            return View();
+
+        }
+
+        public ActionResult Invoices()
+        {
+            ViewBag.Title = "Parking invoices";
+            ViewBag.Message = "Here you can see personal invoices.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Title = "About";
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+    }
+}

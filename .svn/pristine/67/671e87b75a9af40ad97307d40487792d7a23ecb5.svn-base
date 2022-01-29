@@ -1,0 +1,165 @@
+﻿
+
+
+
+<div class="well" ng-controller="CustomerController" >
+    <div class="modal-backdrop" ng-show="disabled" style="-ms-opacity: 0.5; opacity: 0.5; background: white;">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="100%" viewBox="0 0 320 320" fill="transparent" stroke="#337ab7">
+                <defs>
+                    <path id="r1" d="m 154.6 27.2 l 5.4 -3.06 l 5.4 3.06">
+                        <animate id="p1" attributeName="d" values="m160,160l0,0 0,0;m130,110l30,-17 30,17;m130,60l30,-17 30,17;m160,20l0,0 0,0" dur="5s" repeatCount="indefinite" />
+                    </path>
+                    <path id="r2" d="m 148.3 35.6 l 11.7 -6.63 l 11.7 6.63">
+                        <animate attributeName="d" values="m160,160l0,0 0,0;m130,110l30,-17 30,17;m130,60l30,-17 30,17;m160,20l0,0 0,0" dur="10s" repeatCount="indefinite" begin="p1.begin+1s" />
+                        <animate attributeName="stroke-width" values="0;1;1;1;0" dur="6s" repeatCount="indefinite" begin="p1.begin+1s" />
+                    </path>
+                </defs>
+
+                <use xlink:href="#r2" />
+
+                <use xlink:href="#r2" transform="rotate(180 160 160)" />
+
+                <use xlink:href="#r1" transform="rotate(60 160 160)" />
+                <use xlink:href="#r1" transform="rotate(120 160 160)" />
+                <use xlink:href="#r1" transform="rotate(240 160 160)" />
+                <use xlink:href="#r1" transform="rotate(300 160 160)" />
+            </svg>
+    </div>
+
+
+    <h2> @ViewBag.Title</h2>
+    <hr />
+    <p class="lead">Personal information</p>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label">ID</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.ID</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Group</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">
+                    @if (ViewBag.Customer.IsPremium)
+                    {
+                        <a class="btn btn-success btn-xs disabled">Premium</a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-warning btn-xs disabled">Regular</a>
+                    }
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Name</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.Name</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">PhoneNumber</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.PhoneNumber</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Address</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.Address</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.Email</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Agrement start</label>
+            <div class="col-sm-10">
+                <p class="form-control-static">@ViewBag.Customer.Start.ToString("yyyy-MM-dd")</p>
+            </div>
+        </div>
+
+        @*public int ID { get; set; }
+            public string Name { get; set; }
+            public string Email { get; set; }
+            public string PhoneNumber { get; set; }
+            public string Address { get; set; }
+
+            public bool IsPremium { get; set; }
+            public DateTime Start { get; set; }
+            public DateTime? End { get; set; }*@
+    </form>
+    <hr />
+    <form class="form-horizontal">
+        <a href="~/" class="btn btn-default btn-sm">Show customers &raquo;</a>
+    </form>
+    <hr />
+    <p class="lead">@ViewBag.Message <a class="btn btn-default btn-sm  pull-right" ng-click="RefreshData()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span></a></p>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>
+
+
+                        #
+
+                    </th>
+
+                    <th>
+                        Place
+                    </th>
+                    <th>
+                        Period start
+                    </th>
+                    <th>
+                        Period end
+                    </th>
+                    <th>
+                        Length
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr role="row" ng-repeat="p in ParkInfo.Items">
+                    <td>
+                        {{$index + 1}}
+                    </td>
+
+                    <td>
+                        {{ p.ParkHouse.Name }}
+                    </td>
+                    <td>
+                        {{ p.PeriodStart }}
+                    </td>
+                    <td>
+                        {{  p.PeriodEnd }}
+                    </td>
+                    <td>
+                        {{  p.TotalHoursStr }}
+                    </td>
+                    <td>
+                        {{  p.DayAndNight }}
+                    </td>
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <form class="form-horizontal">
+        <a href="~/" class="btn btn-default btn-sm">Show customers &raquo;</a>
+    </form>
+
+
+    @*<p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+

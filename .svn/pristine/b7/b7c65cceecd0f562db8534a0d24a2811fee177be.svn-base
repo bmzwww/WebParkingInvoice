@@ -1,0 +1,71 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using WebParkingInvoice.Models;
+
+namespace WebParkingInvoice.Controllers
+{
+    public class ParkingApiController : ApiController
+    {
+        private List<ParkInfoModel> ParkInfoSample { get; set; }
+
+        public ParkingApiController()
+        {
+            ParkInfoSample = new List<ParkInfoModel>();
+            var defaultParkHouse = new ParkHouseModel() {ID = 1, Address = "Tallinn", Name = "ParkHouse 1"};
+
+            ParkInfoSample.Add(new ParkInfoModel()
+            {
+                ID = 1,
+                CarNumber = "330 AVA",
+                ParkHouse =  defaultParkHouse,
+                PeriodStart = DateTime.Now.AddMonths(-1).AddDays(10).AddHours(-1).AddMinutes(-15),
+                PeriodEnd = DateTime.Now.AddMonths(-1).AddDays(10),
+            });
+
+            ParkInfoSample.Add(new ParkInfoModel()
+            {
+                ID = 2,
+                CarNumber = "456 BGN",
+                ParkHouse = defaultParkHouse,
+                PeriodStart = DateTime.Now.AddMonths(-1).AddDays(10).AddHours(-1).AddMinutes(-15),
+                PeriodEnd = DateTime.Now.AddMonths(-1).AddDays(10),
+            });
+        }
+
+        public List<ParkInfoModel> GetAll()
+        {
+            return ParkInfoSample;
+        }
+
+        //// GET api/values
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
+
+        //// GET api/values/5
+        //public string Get(int id)
+        //{
+        //    return "value";
+        //}
+
+        //// POST api/values
+        //public void Post([FromBody]string value)
+        //{
+        //}
+
+        //// PUT api/values/5
+        //public void Put(int id, [FromBody]string value)
+        //{
+        //}
+
+        //// DELETE api/values/5
+        //public void Delete(int id)
+        //{
+        //}
+    }
+}

@@ -1,0 +1,146 @@
+﻿
+
+<div class="well">
+    <h2> @ViewBag.Title</h2>
+    <p class="lead">@ViewBag.Message</p>
+    <div ng-controller="InvoiceController">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Rate
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr role="row" ng-repeat="p in Invoice.Items">
+                    <td>
+                        {{ $index + 1}}
+                    </td>
+                    <td>
+                        {{ p.Details }}
+                    </td>
+                    <td>
+                        {{ p.Amount }}
+                    </td>
+                    <td>
+                        {{ p.Rate }}
+                    </td>
+                    <td>
+                        {{ p.PriceStr }}
+                    </td>
+                </tr>
+                <tr role="row">
+                    <td colspan="3"></td>
+                    <td>
+                        Total price
+                    </td>
+                    <td>
+                        {{ Invoice.PriceStr }}
+                    </td>
+                </tr>
+                <tr role="row">
+                    <td colspan="3">
+                        
+                    </td>
+                    <td >
+                        Tax
+                    </td>
+                    <td>
+                        {{ Invoice.TaxStr }}
+                    </td>
+                </tr>
+                <tr role="row">
+                    <td colspan="3"></td>
+                    <td>
+                        Amount of tax
+                    </td>
+                    <td>
+                        {{ Invoice.TaxAmountStr }}
+                    </td>
+                </tr>
+                <tr role="row">
+                    <td colspan="3"></td>
+                    <td>
+                        Balance
+                    </td>
+                    <td>
+                        {{ Invoice.BalanceStr }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Description
+                </th>
+                <th>
+                    Quantity
+                </th>
+                <th>
+                    Rate
+                </th>
+                <th>
+                    Amount
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr role="row">
+                <td>
+                    1
+                </td>
+                <td>
+                    ParkHouse 1, 10-02-2016, 08:00 - 09:45, Regular
+                </td>
+                <td>
+                    4
+                </td>
+                <td>
+                    1.50 EUR
+                </td>
+                <td>
+                    6 EUR
+                </td>
+            </tr>
+            <tr role="row">
+                <td>
+                    2
+                </td>
+                <td>
+                    Demo
+                </td>
+                <td>
+                    Premium
+                </td>
+                <td>
+                    1 EUR
+                </td>
+                <td>
+                    <a class="btn btn-success btn-xs">Details &raquo;</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    @*<p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+

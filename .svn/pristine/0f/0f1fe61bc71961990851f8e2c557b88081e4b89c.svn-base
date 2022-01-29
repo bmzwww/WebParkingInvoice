@@ -1,0 +1,94 @@
+﻿
+
+var appModule = angular.module('fontEndAngularApp');
+
+appModule.factory('apiTestResource', apiTestResource);
+appModule.factory('apiCustomerParkInfoResource', apiCustomerParkInfoResource);
+appModule.factory('apiInvoicesResource', apiInvoicesResource);
+appModule.factory('apiGetInvoiceResource', apiGetInvoiceResource);
+
+/* @ngInject */
+function apiInvoicesResource($resource, $log, opExtService) {
+
+    $log.info("1. Resource apiInvoicesResource");
+
+    // Expose interface.
+    var q = $resource(
+      opExtService.getUri('/api/InvoicesApi/'),
+      null,
+      {
+          query: {
+              method: 'GET',
+              isArray: true
+          }
+      }
+    );
+
+    return q;
+}
+
+/* @ngInject */
+function apiTestResource($resource, $log, opExtService) {
+
+    $log.info("1. Resource apiTestResource");
+
+    // Expose interface.
+    var q = $resource(
+      opExtService.getUri('/api/ParkingApi/'),
+      null,
+      {
+          query: {
+              method: 'GET',
+              isArray: true
+          }
+      }
+    );
+
+    return q;
+}
+
+/* @ngInject */
+function apiCustomerParkInfoResource($resource, $log, opExtService) {
+
+    $log.info("1. Resource apiTestResource");
+
+    // Expose interface.
+    var q = $resource(
+      opExtService.getUri('/api/ParkingApi/:id'),
+      null,
+      {
+          query: {
+              method: 'GET',
+              isArray: true,
+              params: {
+                  id: '@id'
+              }
+          }
+      }
+    );
+
+    return q;
+}
+
+/* @ngInject */
+function apiGetInvoiceResource($resource, $log, opExtService) {
+
+    $log.info("1. Resource apiTestResource");
+
+    // Expose interface.
+    var q = $resource(
+      opExtService.getUri('/api/InvoicesApi/:id'),
+      null,
+      {
+          query: {
+              method: 'GET',
+              isArray: false,
+              params: {
+                  id: '@id'
+              }
+          }
+      }
+    );
+
+    return q;
+}

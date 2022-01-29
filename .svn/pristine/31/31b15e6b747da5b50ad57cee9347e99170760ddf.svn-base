@@ -1,0 +1,50 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using WebParkingInvoice.Models;
+using WebParkingInvoice.Services;
+using WebParkingInvoice.Static;
+
+namespace WebParkingInvoice.Controllers
+{
+    public class InvoicesApiController : ApiController
+    {
+        IInvoiceService _iInvoiceService;
+        public InvoicesApiController(IInvoiceService iInvoiceService)
+        {
+            _iInvoiceService = iInvoiceService;
+        }
+
+        //public InvoicesApiController()
+        //{
+        //    if (CustomersStorage.Customers == null)
+        //    {
+        //        CustomersStorage.DemoInit();
+        //    }
+
+        //    if (ParkInfoStorage.ParkInfoCollection == null)
+        //    {
+        //        ParkInfoStorage.DemoInit();
+        //    }
+
+        //    if (InvoicesStorage.Invoices == null)
+        //    {
+        //        InvoicesStorage.DemoInit();
+        //    }
+        //}
+
+        public List<InvoiceModel> Get()
+        {
+            return _iInvoiceService.GetInvoices();
+        }
+
+        public InvoiceModel Get(string id)
+        {
+            return _iInvoiceService.GetInvoiceCalculation(id);
+        }
+    }
+}

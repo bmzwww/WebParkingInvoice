@@ -1,0 +1,111 @@
+﻿
+
+<div class="well">
+    <h2> @ViewBag.Title</h2>
+    <p class="lead">@ViewBag.Message</p>
+    <div ng-controller="IndexController">
+        <table class="table table-hover table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Car number
+                    </th>
+                    <th>
+                        Place
+                    </th>
+                    <th>
+                        Period start
+                    </th>
+                    <th>
+                        Period end
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr role="row" ng-repeat="p in ParkInfo.Items">
+                    <td>
+                        {{ p.ID }}
+                    </td>
+                    <td>
+                        {{ p.CarNumber }}
+                    </td>
+                    <td>
+                        {{ p.ParkHouse.Name }}
+                    </td>
+                    <td>
+                        {{ p.PeriodStart }}
+                    </td>
+                    <td>
+                        {{  p.PeriodEnd }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h2>DEMO</h2>
+    <table class="table table-hover table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    Car number
+                </th>
+                <th>
+                    Place
+                </th>
+                <th>
+                    Period start
+                </th>
+                <th>
+                    Period end
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr role="row">
+                <td>
+                    1
+                </td>
+                <td>
+                    330 AVA
+                </td>
+                <td>
+                    Park house 1
+                </td>
+                <td>
+                    01.01.2016 08:00
+                </td>
+                <td>
+                    02.01.2016 08:45
+                </td>
+            </tr>
+            <tr role="row">
+                <td>
+                    1
+                </td>
+                <td>
+                    456 BGN
+                </td>
+                <td>
+                    Park house 1
+                </td>
+                <td>
+                    01.01.2016 08:00
+                </td>
+                <td>
+                    01.01.2016 08:45
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <a href="~/Home/Invoices/" class="btn btn-primary btn-sm">See Invoices &raquo;</a>
+
+    @*<p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
+</div>
+

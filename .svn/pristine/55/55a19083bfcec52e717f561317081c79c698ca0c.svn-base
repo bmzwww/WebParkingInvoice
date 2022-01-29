@@ -1,0 +1,109 @@
+﻿
+
+var appModule = angular.module('fontEndAngularApp');
+appModule.controller('CustomerController', CustomerController);
+
+
+/* @ngInject */
+function CustomerController($scope,$log, apiTestService) {
+
+    // LOG
+    $log.info('function CustomerController window.location.href=', window.location.href);
+
+    var el = document.createElement('a');
+    el.href = window.location.href;
+    var splitPath = el.pathname.split('/');
+    var number = splitPath[splitPath.length - 1];
+    $log.info('number', number);
+
+    // INIT
+    {
+        $scope.ParkInfo = {Items: []};
+    }
+
+    // Deactivate UI
+    $scope.disabled = true;
+
+    var customerId = Number(number);
+
+    // CALL API
+    var q = apiTestService.getCustomerParkInfo(customerId);
+
+
+    q.$promise.then(function (response) {
+
+        // SHOW ALARM
+        //printObject(response);
+
+     
+
+        $scope.ParkInfo.Items = [];
+        for (var i = 0; i < response.length; i++) {
+
+            var parkInfo = {};
+            var p = response[i];
+            parkInfo.ID = p.ID;
+            parkInfo.ParkHouse = p.ParkHouse;
+            parkInfo.Customer = p.Customer;
+
+            parkInfo.periodStartNet = p.PeriodStart;
+            parkInfo.periodEndNet = p.PeriodEnd;
+
+            parkInfo.PeriodStartJS = new Date(Date.parse(parkInfo.periodStartNet));
+            parkInfo.PeriodEndJs = new Date(Date.parse(parkInfo.periodEndNet));
+
+            parkInfo.PeriodStart = DateToString(parkInfo.PeriodStartJS);
+            parkInfo.PeriodEnd = DateToString(parkInfo.PeriodEndJs);
+
+            parkInfo.DayAmount = p.Amount.Day;
+            parkInfo.NightAmount = p.Amount.Night;
+            
+            $scope.ParkInfo.Items.push(parkInfo);
+        }
+
+        // LOG
+        //console.debug('$scope.ParkInfo.Items', $scope.ParkInfo.Items);
+
+        // Activate UI
+        $scope.disabled = false;
+
+
+    }).catch(function (reason) {
+
+        // SHOW ALARM
+        printObject(reason);
+
+        // Activate UI
+        $scope.disabled = false;
+    });;
+
+}
+
+/* @ngInject */
+function printObject(o) {
+    var out = '';
+    for (var p in o) {
+        out += p + ': ' + o[p] + '\n';
+    }
+    alert(out);
+}
+
+/* @ngInject */
+function DateToString(d) {
+    var str = "";
+
+    str = zeroPad(d.getFullYear(),1000) + "-" + zeroPad((d.getMonth() + 1),10) + "-" + zeroPad(d.getDate(),10) + " " + zeroPad(d.getHours(),10) + ":" + zeroPad(d.getMinutes(),10);
+
+    return str;
+}
+
+/* @ngInject */
+function zeroPad(nr, base) {
+    var len = (String(base).length - String(nr).length) + 1;
+    return len > 0 ? new Array(len).join('0') + nr : nr;
+}
+
+
+
+
+
