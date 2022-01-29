@@ -50,38 +50,75 @@ function InvoicesController($scope,  apiTestService) {
         };
         $scope.SendInvoices = function () {
 
-            // Deactivate UI
-            $scope.disabled = true;
-
             console.warn('SendInvoices');
+            if (confirm("Are you sure to sent invoices to customers?")) {
 
-            // CALL API
-            var q = apiTestService.sendInvoice('SendAll');
+                // Deactivate UI
+                $scope.disabled = true;
 
-            q.$promise.then(function (response) {
+                // CALL API
+                var q = apiTestService.sendInvoice('SendAll');
 
-                // SHOW ALARM
-                //printObject(response);
-
-                // Activate UI
-                $scope.disabled = false;
-
-                LoadInvoices($scope, apiTestService);
-
-
-            })
-                .catch(function (reason) {
+                q.$promise.then(function (response) {
 
                     // SHOW ALARM
-                    printObject(reason);
+                    //printObject(response);
 
                     // Activate UI
                     $scope.disabled = false;
-                });
+
+                    LoadInvoices($scope, apiTestService);
 
 
+                })
+                    .catch(function (reason) {
 
+                        // SHOW ALARM
+                        printObject(reason);
+
+                        // Activate UI
+                        $scope.disabled = false;
+                    });
+
+            }
         };
+        $scope.Restart = function () {
+
+            console.warn('Restart');
+
+            if (confirm("Are you sure to restart demo?")) {
+
+                // Deactivate UI
+                $scope.disabled = true;
+
+                // CALL API
+                var q = apiTestService.restart();
+
+                q.$promise.then(function (response) {
+
+                    // SHOW ALARM
+                    //printObject(response);
+
+                    // Activate UI
+                    $scope.disabled = false;
+
+                    LoadInvoices($scope, apiTestService);
+
+
+                })
+                    .catch(function (reason) {
+
+                        // SHOW ALARM
+                        printObject(reason);
+
+                        // Activate UI
+                        $scope.disabled = false;
+                    });
+
+            }    
+        };
+
+
         $scope.RefreshData = function () {
             // LOG
             console.info('RefreshData()', new Date());

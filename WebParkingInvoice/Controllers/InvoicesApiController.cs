@@ -31,7 +31,5 @@ namespace WebParkingInvoice.Controllers
             // Get invoice details
            return _iInvoiceService.GetInvoice(id);
         }
-
-     
     }
 }

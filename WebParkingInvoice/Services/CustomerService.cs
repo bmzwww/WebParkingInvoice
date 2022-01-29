@@ -86,8 +86,8 @@ namespace WebParkingInvoice.Services
                 var customer5 = new CustomerModel()
                 {
                     Address = "Rahukohtu 66, 10130 Tallinn",
-                    Email = "Andrus.Rõivas@gmail.com",
-                    Name = "Andrus  Rõivas",
+                    Email = "Andrus.Mõinus@gmail.com",
+                    Name = "Andrus  Mõinus",
                     ID = rnd.Next(0, int.MaxValue),
                     PhoneNumber =
                         String.Format("+372 55 {0} {1}", rnd.Next(1, 999).ToString("000"),
@@ -99,8 +99,8 @@ namespace WebParkingInvoice.Services
                 var customer6 = new CustomerModel()
                 {
                     Address = "Lastekodu 13, 10113 Tallinn",
-                    Email = "Maart.Ansip@gmail.com",
-                    Name = "Maart Ansip",
+                    Email = "Maart.Leopart@gmail.com",
+                    Name = "Maart Leopart",
                     ID = rnd.Next(0, int.MaxValue),
                     PhoneNumber =
                         String.Format("+372 55 {0} {1}", rnd.Next(1, 999).ToString("000"),
@@ -125,8 +125,8 @@ namespace WebParkingInvoice.Services
                 var customer8 = new CustomerModel()
                 {
                     Address = "Tuulemäe 3 11411 Tallinn",
-                    Email = "Vladimir.Putin@gmail.com",
-                    Name = "Vladimir Putin",
+                    Email = "Max.Payne@gmail.com",
+                    Name = "Max Payne",
                     ID = rnd.Next(0, int.MaxValue),
                     PhoneNumber =
                         String.Format("+372 55 {0} {1}", rnd.Next(1, 999).ToString("000"),

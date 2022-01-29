@@ -20,9 +20,24 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Customers", "Customers", "Home")</li>
-                    <li>@Html.ActionLink("Invoices", "Invoices", "Home")</li>
-                    <li>@Html.ActionLink("Restart", "Restart", "Home")</li>
+                    <li>
+                        <a href="@Url.Action("Customers", "Home")" class="btn">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                            Customers
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Invoices", "Home")" class="btn">
+                            <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                            Invoices
+                        </a>
+                    </li>
+                    @*<li>
+                        <a href="@Url.Action("Restart", "Home")" class="btn">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            Restart
+                        </a>
+                    </li>*@
                 </ul>
             </div>
         </div>

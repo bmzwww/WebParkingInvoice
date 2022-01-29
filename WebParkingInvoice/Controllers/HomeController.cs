@@ -24,8 +24,8 @@ namespace WebParkingInvoice.Controllers
         public ActionResult Index()
         {
             // Main page with customers and their actual parking information
-            ViewBag.Title = "Index";
-            ViewBag.Message = "Here you can see a list of customers and their short parking information.";
+            ViewBag.Title = "Home";
+            ViewBag.Message = "Here you can see a general information.";
 
             return View();
         
@@ -70,7 +70,7 @@ namespace WebParkingInvoice.Controllers
         public ActionResult Invoices()
         {
             // Page with list of invoices
-            ViewBag.Title = "Parking invoices";
+            ViewBag.Title = "Invoices";
             ViewBag.Message = "Here you can see parking invoices.";
 
             return View();

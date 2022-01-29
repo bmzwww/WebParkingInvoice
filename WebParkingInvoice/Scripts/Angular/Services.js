@@ -1,14 +1,10 @@
 ﻿
-
 var appModule = angular.module('fontEndAngularApp');
-
-
 
 appModule.factory('apiTestService', apiTestService);
 
-
 /* @ngInject */
-function apiTestService(apiTestResource, apiCustomerParkInfoResource, apiInvoicesResource, apiGetInvoiceResource, apiCalculationResource, apiInvoiceSenderResource) {
+function apiTestService(apiTestResource, apiCustomerParkInfoResource, apiInvoicesResource, apiGetInvoiceResource, apiCalculationResource, apiInvoiceSenderResource, apiRestartResource) {
     console.info("2. Service apiTestService");
 
     return {
@@ -29,12 +25,10 @@ function apiTestService(apiTestResource, apiCustomerParkInfoResource, apiInvoice
         },
         sendInvoice: function (id) {
             return apiInvoiceSenderResource.query({ id: id });
+        },
+        restart: function () {
+            return apiRestartResource.query();
         }
-
-
-        
-        
-        
     };
 
 }

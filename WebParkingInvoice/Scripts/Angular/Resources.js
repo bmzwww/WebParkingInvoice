@@ -9,6 +9,27 @@ appModule.factory('apiGetInvoiceResource', apiGetInvoiceResource);
 appModule.factory('apiInvoicesResource', apiInvoicesResource);
 appModule.factory('apiCalculationResource', apiCalculationResource);
 appModule.factory('apiInvoiceSenderResource', apiInvoiceSenderResource);
+appModule.factory('apiRestartResource', apiRestartResource);
+
+/* @ngInject */
+function apiRestartResource($resource, opExtService) {
+
+    console.info("1. Resource apiRestartResource");
+
+    // Expose interface.
+    var q = $resource(
+        opExtService.getUri('/api/RestartApi/'),
+        null,
+        {
+            query: {
+                method: 'GET',
+                isArray: false
+            }
+        }
+    );
+
+    return q;
+}
 
 /* @ngInject */
 function apiInvoiceSenderResource($resource, opExtService) {
@@ -32,6 +53,7 @@ function apiInvoiceSenderResource($resource, opExtService) {
 
     return q;
 }
+
 /* @ngInject */
 function apiCalculationResource($resource, opExtService) {
 
@@ -140,3 +162,4 @@ function apiGetInvoiceResource($resource, opExtService) {
 
     return q;
 }
+

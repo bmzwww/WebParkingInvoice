@@ -157,6 +157,7 @@
     <Compile Include="Controllers\InvoiceSenderApiController.cs" />
     <Compile Include="Controllers\InvoiceCalculationApiController.cs" />
     <Compile Include="Controllers\InvoicesApiController.cs" />
+    <Compile Include="Controllers\RestartApiController.cs" />
     <Compile Include="Controllers\ParkingApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
