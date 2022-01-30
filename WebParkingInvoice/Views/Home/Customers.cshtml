@@ -34,9 +34,8 @@
                         </td>
                         <td>
                             <a href="~/Home/Customer/{{p.Customer.ID}}">{{ p.Customer.Name }} </a>
-                            <a class="btn btn-success btn-xs disabled" ng-show="p.Customer.IsPremium" title="Premium">P</a>
-                            <a class="btn btn-warning btn-xs disabled" ng-hide="p.Customer.IsPremium" title="Regular">R</a>
-
+                            <a class="btn btn-danger btn-xs disabled" ng-show="p.Customer.IsPremium" title="Premium"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
+                            <a class="btn btn-success btn-xs disabled" ng-hide="p.Customer.IsPremium" title="Regular"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span></a>
                         </td>
                         <td>
                             {{ p.ParkHouse.Name }}

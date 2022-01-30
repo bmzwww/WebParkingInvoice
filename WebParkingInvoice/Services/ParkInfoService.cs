@@ -42,16 +42,16 @@ namespace WebParkingInvoice.Services
             // Generate ParkInfo
             if (ParkInfoStorage.ParkInfoCollection == null || forceInit)
             {
-                var list = new List<ParkInfoModel>();
-                var defaultParkHouse = new ParkHouseModel() { ID = 1, Address = "Tallinn", Name = "ParkHouse 1" };
+                List<ParkInfoModel> list = new List<ParkInfoModel>();
+                ParkHouseModel defaultParkHouse = new ParkHouseModel() { ID = 1, Address = "Tallinn", Name = "ParkHouse #1" };
 
                 var rnd = new Random();
 
-                var cur = DateTime.Now.Date;
+                DateTime cur = DateTime.Now.Date;
                 cur = cur.AddDays(-cur.Day);
 
                 // Random cycle
-                var maxCycle = rnd.Next(100, 600);
+                int maxCycle = rnd.Next(100, 600);
 
                 while (list.Count < maxCycle)
                 {
@@ -109,20 +109,6 @@ namespace WebParkingInvoice.Services
 
                         if (!intersect)
                         {
-
-                            //var endNight = randomDate1.Date.AddHours(7);
-
-                            //if (randomDate1 > randomDate1.Date.AddDays(-1).AddHours(19) && randomDate1 < endNight)
-                            //{
-                            //    if (endNight > randomDate2)
-                            //    {
-                            //        endNight = randomDate2;
-                            //    }
-
-                            //    nightPeriodAmount = GetHalfHoursFromDoubleHours( (endNight - randomDate1).TotalHours);
-                            //}
-
-                            //var amount = _iHoursCalculationService.CalculateAmount(randomDate1, randomDate2);
                             var pim = new ParkInfoModel()
                             {
                                 ID = list.Count + 1,
@@ -147,23 +133,6 @@ namespace WebParkingInvoice.Services
                     }
                 }
 
-                //ParkInfoSample.Add(new ParkInfoModel
-                //{
-                //    ID = 1,
-                //    AgreementCode = "AGR00001",
-                //    ParkHouse = defaultParkHouse,
-                //    PeriodStart = DateTime.Now.AddMonths(-1).AddDays(10).AddHours(-1).AddMinutes(-15),
-                //    PeriodEnd = DateTime.Now.AddMonths(-1).AddDays(10),
-                //});
-
-                //ParkInfoSample.Add(new ParkInfoModel
-                //{
-                //    ID = 2,
-                //    AgreementCode = "AGR00002",
-                //    ParkHouse = defaultParkHouse,
-                //    PeriodStart = DateTime.Now.AddMonths(-1).AddDays(10).AddHours(-1).AddMinutes(-15),
-                //    PeriodEnd = DateTime.Now.AddMonths(-1).AddDays(10),
-                //});
                 ParkInfoStorage.ParkInfoCollection = list.OrderBy(o => o.PeriodStart).ToList();
             }
         }

@@ -30,7 +30,6 @@ namespace WebParkingInvoice.Services
                 // Init random data
                 var rnd = new Random();
 
-
                 var customer1 = new CustomerModel()
                 {
                     Address = "Majaka 31, 11416 Tallinn",
@@ -40,7 +39,7 @@ namespace WebParkingInvoice.Services
                     PhoneNumber =
                         String.Format("+372 55 {0} {1}", rnd.Next(1, 999).ToString("000"),
                             rnd.Next(1, 999).ToString("000")),
-                    IsPremium = rnd.Next(0, 2) > 0,
+                    IsPremium = false,
                     Start = DateTime.Now.AddMonths(-6)
                 };
 
@@ -162,8 +161,6 @@ namespace WebParkingInvoice.Services
             {
                 DemoInit(false);
             }
-
-
 
             return CustomersStorage.Customers;
         }

@@ -20,11 +20,11 @@
                 <p class="form-control-static">
                     @if (ViewBag.Customer.IsPremium)
                     {
-                        <a class="btn btn-success btn-xs disabled">Premium</a>
+                        <a class="btn btn-danger btn-xs disabled"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Premium</a>
                     }
                     else
                     {
-                        <a class="btn btn-warning btn-xs disabled">Regular</a>
+                        <a class="btn btn-success btn-xs disabled"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Regular</a>
                     }
                 </p>
             </div>

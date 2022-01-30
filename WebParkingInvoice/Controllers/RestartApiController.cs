@@ -27,8 +27,8 @@ namespace WebParkingInvoice.Controllers
 
         public bool Get()
         {
-           _parkInfoService.DemoInit(true);
-           _customersService.DemoInit(true);
+            _customersService.DemoInit(true);
+            _parkInfoService.DemoInit(true);
            _invoiceService.DemoInit(true);
            
            return true;

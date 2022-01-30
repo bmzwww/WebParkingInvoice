@@ -50,9 +50,8 @@
                     </td>
                     <td>
                         {{ i.Customer.Name }}
-                        <a class="btn btn-success btn-xs disabled" ng-show="i.Customer.IsPremium" title="Premium">P</a>
-                        <a class="btn btn-warning btn-xs disabled" ng-hide="i.Customer.IsPremium" title="Regular">R</a>
-
+                        <a class="btn btn-danger btn-xs disabled" ng-show="i.Customer.IsPremium" title="Premium"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
+                        <a class="btn btn-success btn-xs disabled" ng-hide="i.Customer.IsPremium" title="Regular"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span></a>
                     </td>
                     <td>
                         {{ i.Details }}
