@@ -53,29 +53,25 @@ function InvoiceController($scope, apiTestService) {
         };
         $scope.SendInvoice = function () {
 
-            // Deactivate UI
-            $scope.disabled = true;
-
             console.warn('CalculateInvoice');
 
-            // Number
-            var number = ReadNumber();
+            if (confirm("Are you sure to send invoice by email to customer?")) {
 
-            // CALL API
-            var q = apiTestService.sendInvoice(number);
+                // Deactivate UI
+                $scope.disabled = true;
 
-            q.$promise.then(function (response) {
+                // Number
+                var number = ReadNumber();
 
-                // SHOW ALARM
-                //printObject(response);
+                // CALL API
+                var q = apiTestService.sendInvoice(number);
 
-                // Activate UI
-                $scope.disabled = false;
+                q.$promise.then(function (response) {
+                    // Activate UI
+                    $scope.disabled = false;
 
-                LoadInvoice($scope, apiTestService);
-
-
-            })
+                    LoadInvoice($scope, apiTestService);
+                })
                 .catch(function (reason) {
 
                     // SHOW ALARM
@@ -86,7 +82,7 @@ function InvoiceController($scope, apiTestService) {
                 });
 
 
-
+            }
         };
         $scope.RefreshData = function () {
             // LOG
@@ -122,10 +118,6 @@ function LoadInvoice($scope, apiTestService) {
     var q = apiTestService.getInvoice(number);
 
     q.$promise.then(function (response) {
-
-        // SHOW ALARM
-        //printObject(response);
-
 
         $scope.Invoice = {};
         $scope.Invoice.Items = [];

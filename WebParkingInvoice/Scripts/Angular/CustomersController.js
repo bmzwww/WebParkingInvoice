@@ -10,7 +10,6 @@ function CustomersController($scope, apiTestService) {
     // LOG
     console.info('Controller CustomersController()');
 
-
     // EVENTS
     {
         $scope.RefreshData = function () {
@@ -20,12 +19,45 @@ function CustomersController($scope, apiTestService) {
 
             LoadCustomers($scope, apiTestService);
         };
+
+        $scope.Restart = function () {
+
+            console.warn('Restart');
+
+            if (confirm("Are you sure to restart demo?")) {
+
+                // Deactivate UI
+                $scope.disabled = true;
+
+                // CALL API
+                var q = apiTestService.restart();
+
+                q.$promise.then(function (response) {
+
+                    // Activate UI
+                    $scope.disabled = false;
+
+                    LoadCustomers($scope, apiTestService);
+                })
+                    .catch(function (reason) {
+
+                        // SHOW ALARM
+                        printObject(reason);
+
+                        // Activate UI
+                        $scope.disabled = false;
+                    });
+
+            }
+        };
     }
 
     // Load
    $scope.RefreshData();
 
+
 }
+
 
 /* @ngInject */
 function LoadCustomers($scope, apiTestService) {

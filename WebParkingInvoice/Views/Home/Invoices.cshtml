@@ -35,9 +35,6 @@
                     <th>
                         Status
                     </th>
-                    @*<th>
-                            Actions
-                        </th>*@
                 </tr>
             </thead>
             <tbody>
@@ -50,8 +47,7 @@
                     </td>
                     <td>
                         {{ i.Customer.Name }}
-                        <a class="btn btn-danger btn-xs disabled" ng-show="i.Customer.IsPremium" title="Premium"><span class="glyphicon glyphicon-star" aria-hidden="true"></span></a>
-                        <a class="btn btn-success btn-xs disabled" ng-hide="i.Customer.IsPremium" title="Regular"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span></a>
+                        <span class="glyphicon glyphicon-star" aria-hidden="true" ng-show="i.Customer.IsPremium" ></span>
                     </td>
                     <td>
                         {{ i.Details }}
@@ -72,17 +68,15 @@
                         <a class="btn btn-default btn-xs disabled" ng-show="i.Status == 3 || i.Status == 1 || i.Status == 2"> {{ i.StatusStr }}</a>
 
                     </td>
-                    @*<td>
-                            <a class="btn btn-success btn-xs" href="~/Home/Invoice/{{i.Number}}">Details &raquo;</a>
-                        </td>*@
                 </tr>
             </tbody>
         </table>
     </div>
 
-    <form class="form-horizontal">
+    <form class="form-horizontal">       
+        <a href="~/Home/Customers" class="btn btn-default btn-sm">Show customers &raquo;</a> 
         <a class="btn btn-primary btn-sm" ng-click="CalculateInvoices()">Calculate all</a>
-        <a class="btn btn-warning btn-sm" ng-click="SendInvoices()">Send all</a>
-        <a class="btn btn-warning btn-sm" ng-click="Restart()">Restart demo</a>
+        <a class="btn btn-default btn-sm" ng-click="SendInvoices()">Send all</a>
+        <a class="btn btn-default btn-sm pull-right" ng-click="Restart()"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Restart demo</a>
     </form>
 </div>
